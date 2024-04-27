@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ .Site.LanguageCode }}">
   {{ partial "head.html" . }}
 
@@ -50,9 +50,9 @@
         </div>
       </main>
     </div>
-    {{ partial "footer.html" . }} {{ template
-    "_internal/google_analytics_async.html" . }} {{ if and
-    .Site.Params.EnableLocalSearch .Site.Params.Rss }}
+    {{ partial "footer.html" . }} 
+    {{ template "_internal/google_analytics.html". }} 
+    {{ if and .Site.Params.EnableLocalSearch .Site.Params.Rss }}
     <script type="text/javascript">
       const host = window.location.host;
       const keyword = localStorage.getItem("keyword");
@@ -68,10 +68,10 @@
       }
 
       const primaryColor = getComputedStyle(
-        document.documentElement
+        document.documentElement,
       ).getPropertyValue("--color-bg-primary");
       const mutedColor = getComputedStyle(
-        document.documentElement
+        document.documentElement,
       ).getPropertyValue("--color-fg-muted");
       const hoverColor = "#216EEB";
 
@@ -212,7 +212,7 @@
         fetch(
           `${
             host.indexOf("localhost") > -1 ? "http://" : "https://"
-          }${host}/index.xml`
+          }${host}/index.xml`,
         )
           .then((resp) => resp.text())
           .then(async (res) => {
@@ -231,7 +231,7 @@
                     if (pureText.indexOf(keyword) >= 0) {
                       matched.push(i);
                     }
-                  })
+                  }),
                 );
               }
             })();
@@ -246,7 +246,7 @@
               const r = createSearchItem(
                 titleResult[itemIndex].textContent,
                 linkResult[itemIndex].textContent,
-                index + 1
+                index + 1,
               );
               const node = document.createRange().createContextualFragment(r);
               resultDom.appendChild(node);
@@ -269,7 +269,7 @@
           (e) => {
             debounce(() => search(e.target.value), 500);
           },
-          false
+          false,
         );
       });
 
